@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>Kingdom.Combinatorics.Combinatorials</RootNamespace>
-    <Version>1.0.19.25048</Version>
-    <AssemblyVersion>1.0.19.25048</AssemblyVersion>
-    <FileVersion>1.0.19.25048</FileVersion>
-    <PackageVersion>1.0.19.25048</PackageVersion>
+    <Version>1.0.20.29191</Version>
+    <AssemblyVersion>1.0.20.29191</AssemblyVersion>
+    <FileVersion>1.0.20.29191</FileVersion>
+    <PackageVersion>1.0.20.29191</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,8 +10,8 @@
     <Title>Kingdom.Combinatorics.Combinatorials</Title>
     <PackageId>Kingdom.Combinatorics.Combinatorials</PackageId>
     <PackageDescription>Provides a set of helpful Combinatoric assets for use during operation.</PackageDescription>
-    <RepositoryUrl>http://github.com/mwpowellhtx/Kingdom.Combinatorics</RepositoryUrl>
-    <PackageLicenseUrl>http://github.com/mwpowellhtx/Kingdom.Combinatorics\LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/mwpowellhtx/Kingdom.Combinatorics</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/mwpowellhtx/Kingdom.Combinatorics\LICENSE</PackageLicenseUrl>
     <Copyright>Copyright © 2019</Copyright>
     <PackageTags>combinatorics; combinatorial; combiner; combine; append; values; object; current; combination; combinations; exhausted; count; long; enumerable; array</PackageTags>
     <IncludeSymbols Condition="'$(Configuration)' == 'Debug'">true</IncludeSymbols>
@@ -29,10 +29,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Kingdom.Combinatorics.Combinatorials</RootNamespace>
-    <Version>1.1.6.18648</Version>
-    <AssemblyVersion>1.1.6.18648</AssemblyVersion>
-    <FileVersion>1.1.6.18648</FileVersion>
-    <PackageVersion>1.1.6.18648</PackageVersion>
+    <Version>1.2.7.29189</Version>
+    <AssemblyVersion>1.2.7.29189</AssemblyVersion>
+    <FileVersion>1.2.7.29189</FileVersion>
+    <PackageVersion>1.2.7.29189</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
