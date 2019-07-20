@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- We could manage bottom line netstandard1.3, but this is the recommended migration path. -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Kingdom.Combinatorics.Permutations</RootNamespace>
+    <Version>1.0.0.10359</Version>
+    <AssemblyVersion>1.0.0.10359</AssemblyVersion>
+    <FileVersion>1.0.0.10359</FileVersion>
+    <PackageVersion>1.0.0.10359</PackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Kingdom.Combinatorics.Permutations</Title>
+    <PackageId>Kingdom.Combinatorics.Permutations</PackageId>
+    <Description>Provides a set of helpful Combinatoric Permutations assets for use during operation.</Description>
+    <PackageTags>combinatorics; permutations; combinations; values; k; select; many; skip; enumerable</PackageTags>
+    <RepositoryUrl>https://github.com/mwpowellhtx/Kingdom.Combinatorics</RepositoryUrl>
+    <IncludeSymbols Condition="'$(Configuration)'=='Debug'">true</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\netstandard1.3\Kingdom.Combinatorics.Permutations.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Kingdom.Combinatorics.Permutations.csproj.DotSettings" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(MSBuildProjectName).Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <Import Project="../Licensing.props" />
+
+</Project>
