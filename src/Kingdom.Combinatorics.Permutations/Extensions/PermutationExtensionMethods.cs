@@ -112,6 +112,8 @@ namespace Kingdom.Combinatorics.Permutations
         public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> values, int? r = null)
             where T : IComparable<T>
         {
+            // We just want this slice off the front, and off the reversed tail, that is all.
+            var rActual = r ?? values.Count();
             var indices = Range(0, values.Count()).ToArray();
 
             // ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
@@ -122,35 +124,24 @@ namespace Kingdom.Combinatorics.Permutations
             // TODO: TBD: and does anything need to be reversed, etc?
             IEnumerable<IEnumerable<T>> EnumerateCurrent()
             {
-                // TODO: TBD: which allows for permutations in the R domain...
-                for (var count = 1; count <= indices.Length; count++)
                 {
-                    // Remember to pick up the R in the nPr calculation.
-                    if (r.HasValue && r != count)
-                    {
-                        continue;
-                    }
-
-                    var candidate = indices.Take(count).Select(values.ElementAt).ToArray();
+                    var candidate = indices.Take(rActual).Select(values.ElementAt).ToArray();
                     if (!permuted.Contains(candidate, comparer))
                     {
                         permuted.Add(candidate);
                         yield return candidate;
                     }
+                }
 
-                    if (count <= 1)
+                // Bypass the tail when we have the breadth of the Indices.
+                if (rActual != indices.Length)
+                {
+                    var candidate = indices.Reverse().Take(rActual).Select(values.ElementAt).ToArray();
+                    if (!permuted.Contains(candidate, comparer))
                     {
-                        continue;
+                        permuted.Add(candidate);
+                        yield return candidate;
                     }
-
-                    var reversed = indices.Reverse().Take(count).Select(values.ElementAt).ToArray();
-                    if (permuted.Contains(reversed, comparer))
-                    {
-                        continue;
-                    }
-
-                    permuted.Add(reversed);
-                    yield return reversed;
                 }
             }
 
