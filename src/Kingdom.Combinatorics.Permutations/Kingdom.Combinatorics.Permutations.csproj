@@ -10,10 +10,10 @@
     <!-- We could manage bottom line netstandard1.3, but this is the recommended migration path. -->
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Kingdom.Combinatorics.Permutations</RootNamespace>
-    <Version>1.0.0.11720</Version>
-    <AssemblyVersion>1.0.0.11720</AssemblyVersion>
-    <FileVersion>1.0.0.11720</FileVersion>
-    <PackageVersion>1.0.0.11720</PackageVersion>
+    <Version>1.1.0.7929</Version>
+    <AssemblyVersion>1.1.0.7929</AssemblyVersion>
+    <FileVersion>1.1.0.7929</FileVersion>
+    <PackageVersion>1.1.0.7929</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup>
