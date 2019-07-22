@@ -14,68 +14,10 @@ namespace Kingdom.Combinatorics.Permutations
         {
         }
 
-        /// <inheritdoc />
-        private class PermutationComparer : IComparer<IEnumerable<char>>
-        {
-            /// <summary>
-            /// Gets an Instance of the <see cref="IComparer{T}"/>.
-            /// </summary>
-            internal static PermutationComparer Instance => new PermutationComparer();
-
-            /// <summary>
-            /// Private Constructor.
-            /// </summary>
-            private PermutationComparer()
-            {
-            }
-
-            /// <summary>
-            /// Returns the result after Comparing <paramref name="a"/> to <paramref name="b"/>.
-            /// </summary>
-            /// <param name="a"></param>
-            /// <param name="b"></param>
-            /// <returns></returns>
-            private static int Compare(char a, char b) => a.CompareTo(b);
-
-            // ReSharper disable PossibleMultipleEnumeration
-            /// <inheritdoc />
-            public int Compare(IEnumerable<char> x, IEnumerable<char> y)
-            {
-                const int gt = 1, lt = -1;
-
-                int? EvaluateCollections()
-                    => x != null && y == null
-                        ? gt
-                        : y != null && x == null
-                            ? lt
-                            : x == null
-                                ? gt
-                                : x.Count() > y.Count()
-                                    ? gt
-                                    : x.Count() < y.Count()
-                                        ? (int?) lt
-                                        : null;
-
-                const int eq = 0;
-
-                int EvaluatePairs()
-                {
-                    // ReSharper disable AssignNullToNotNullAttribute
-                    var comparisons = x.Zip(y, (first, second) => new {first, second})
-                        .Select(zipped => (int?) Compare(zipped.first, zipped.second)).ToArray();
-                    // ReSharper restore AssignNullToNotNullAttribute
-
-                    return comparisons.FirstOrDefault(comparison => comparison != eq) ?? eq;
-                }
-
-                return EvaluateCollections() ?? EvaluatePairs();
-            }
-            // ReSharper restore PossibleMultipleEnumeration
-        }
-
         // ReSharper disable PossibleMultipleEnumeration
         /// <summary>
-        /// 
+        /// Reduction to Distinct Sets of Permutations is beyond the scope of what we are doing
+        /// here. We want to verify the full range of Permutations, forwards and backwards.
         /// </summary>
         /// <param name="values"></param>
         /// <param name="r"></param>
@@ -83,17 +25,43 @@ namespace Kingdom.Combinatorics.Permutations
         [Theory, ClassData(typeof(PermutationTestCases))]
         public void Verify_Permutations(IEnumerable<char> values, int? r, IEnumerable<IEnumerable<char>> expected)
         {
-            values.AssertNotNull().AssertNotEmpty();
-            var length = r ?? values.Count();
+            // Sketch in some Factorial calculations.
+            int Factorial(int x) => x <= 0 ? 1 : x * Factorial(x - 1);
 
-            expected.AssertNotNull().AssertNotEmpty().ToList().ForEach(
-                x => x.AssertNotNull().AssertNotEmpty().AssertEqual(length, y => y.Count()));
+            int CalculateCount(int count, int rActual) => Factorial(count) / Factorial(count - rActual);
 
-            var comparer = PermutationComparer.Instance.AssertNotNull();
-            var permutations = values.Permute(r).AssertNotNull().AssertNotEmpty().ToArray();
+            int CalculateTotalCount(int count, int? rActual)
+            {
+                if (rActual != null)
+                {
+                    return CalculateCount(count, rActual.Value);
+                }
 
-            permutations.AssertEqual(expected.Count(), x => x.Length).OrderBy(x => x, comparer)
-                .Zip(expected.OrderBy(y => y, comparer), (a, e) => new {a, e})
+                var total = 0;
+                rActual = count;
+                while (rActual > 0)
+                {
+                    total += CalculateCount(count, rActual.Value);
+                    rActual--;
+                }
+
+                return total;
+            }
+
+            // Just work with a simple String Rendering for purposes of Ordering.
+            string Render(IEnumerable<char> parts) => parts.Aggregate("", (g, x) => $"{g}{x}");
+
+            // Thereby ensuring that the bits themselves are in the correct order from here on.
+            expected = expected.AssertNotNull().AssertNotEmpty()
+                .AssertEqual(CalculateTotalCount(
+                    values.AssertNotNull().AssertNotEmpty().Count(), r), x => x.Count())
+                .OrderBy(Render).ToArray();
+
+            //var comparer = PermutationComparer.Instance.AssertNotNull();
+            var permutations = values.Permute(r).AssertNotNull().AssertNotEmpty().OrderBy(Render).ToArray();
+
+            permutations.AssertEqual(expected.Count(), x => x.Length)
+                .Zip(expected, (a, e) => new {a, e})
                 .ToList().ForEach(zipped => zipped.a.AssertEqual(zipped.e));
         }
         // ReSharper restore PossibleMultipleEnumeration
