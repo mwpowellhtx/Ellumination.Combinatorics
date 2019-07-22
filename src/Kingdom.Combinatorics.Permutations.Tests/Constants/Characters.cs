@@ -18,6 +18,11 @@ namespace Kingdom.Combinatorics.Permutations
         /// &apos;c&apos;
         /// </summary>
         public const char c = 'c';
+
+        /// <summary>
+        /// &apos;d&apos;
+        /// </summary>
+        public const char d = 'd';
     }
     // ReSharper restore InconsistentNaming
 }
