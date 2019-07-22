@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>Kingdom.Combinatorics.Permutations</RootNamespace>
-    <Version>1.1.0.7789</Version>
-    <AssemblyVersion>1.1.0.7789</AssemblyVersion>
-    <FileVersion>1.1.0.7789</FileVersion>
+    <Version>1.1.0.2194</Version>
+    <AssemblyVersion>1.1.0.2194</AssemblyVersion>
+    <FileVersion>1.1.0.2194</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
