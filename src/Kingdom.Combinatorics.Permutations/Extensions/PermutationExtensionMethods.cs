@@ -112,7 +112,7 @@ namespace Kingdom.Combinatorics.Permutations
         public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> values, int? r = null)
             where T : IComparable<T>
         {
-            var indexes = Range(0, values.Count()).ToArray();
+            var indices = Range(0, values.Count()).ToArray();
 
             // ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
             var permuted = new List<IEnumerable<T>> { };
@@ -123,7 +123,7 @@ namespace Kingdom.Combinatorics.Permutations
             IEnumerable<IEnumerable<T>> EnumerateCurrent()
             {
                 // TODO: TBD: which allows for permutations in the R domain...
-                for (var count = 1; count <= indexes.Length; count++)
+                for (var count = 1; count <= indices.Length; count++)
                 {
                     // Remember to pick up the R in the nPr calculation.
                     if (r.HasValue && r != count)
@@ -131,7 +131,7 @@ namespace Kingdom.Combinatorics.Permutations
                         continue;
                     }
 
-                    var candidate = indexes.Take(count).Select(values.ElementAt).ToArray();
+                    var candidate = indices.Take(count).Select(values.ElementAt).ToArray();
                     if (!permuted.Contains(candidate, comparer))
                     {
                         permuted.Add(candidate);
@@ -143,7 +143,7 @@ namespace Kingdom.Combinatorics.Permutations
                         continue;
                     }
 
-                    var reversed = indexes.Reverse().Take(count).Select(values.ElementAt).ToArray();
+                    var reversed = indices.Reverse().Take(count).Select(values.ElementAt).ToArray();
                     if (permuted.Contains(reversed, comparer))
                     {
                         continue;
@@ -166,7 +166,7 @@ namespace Kingdom.Combinatorics.Permutations
                 if (weights[upper] < upper)
                 {
                     var lower = upper % 2 * weights[upper];
-                    Swap(ref indexes[lower], ref indexes[upper]);
+                    Swap(ref indices[lower], ref indices[upper]);
 
                     foreach (var x in EnumerateCurrent())
                     {
