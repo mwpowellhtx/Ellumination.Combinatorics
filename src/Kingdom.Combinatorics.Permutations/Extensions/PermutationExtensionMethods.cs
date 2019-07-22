@@ -5,7 +5,7 @@ using System.Linq;
 // ReSharper disable IdentifierTypo
 namespace Kingdom.Combinatorics.Permutations
 {
-    using static Math;
+    using static Enumerable;
 
     /// <summary>
     /// Provides a helpful set of Permutation Extension Methods.
@@ -35,77 +35,153 @@ namespace Kingdom.Combinatorics.Permutations
             }
         }
 
-        // ReSharper disable PossibleMultipleEnumeration
+        internal static IEnumerable<T> GetRangeOrDefault<T>(this IEnumerable<T> range) => range ?? GetRange<T>();
+
         /// <summary>
-        /// Permutes All of the <paramref name="values"/>, gathering the intermediate subsets
-        /// during the <paramref name="inner"/> iterations.
+        /// Which <see cref="GetHashCode"/> forces
+        /// <see cref="Equals(IEnumerable{T}, IEnumerable{T})"/> to be invoked.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="values"></param>
-        /// <param name="inner"></param>
-        /// <returns></returns>
-        private static IEnumerable<IEnumerable<T>> PermuteAll<T>(this IEnumerable<T> values, ICollection<IEnumerable<T>> inner, int? r)
+        /// <inheritdoc />
+        private abstract class ForcedEqualityComparer<T> : IEqualityComparer<IEnumerable<T>>
+            where T : IComparable<T>
         {
-            IEnumerable<T> AppendCandidate(IEnumerable<T> candidate)
-            {
-                if (candidate.Count() == (r ?? 0))
-                {
-                    inner.Add(candidate);
-                }
+            public abstract bool Equals(IEnumerable<T> x, IEnumerable<T> y);
 
-                return candidate;
+            public int GetHashCode(IEnumerable<T> obj) => 0;
+        }
+
+        /// <inheritdoc />
+        private class SequenceEqualityComparer<T> : ForcedEqualityComparer<T>
+            where T : IComparable<T>
+        {
+            /// <summary>
+            /// Gets a new instance of the Comparer.
+            /// </summary>
+            internal static SequenceEqualityComparer<T> Comparer => new SequenceEqualityComparer<T>();
+
+            /// <summary>
+            /// Private Constructor.
+            /// </summary>
+            private SequenceEqualityComparer()
+            {
             }
 
-            var count = values.Count();
+            /// <summary>
+            /// 0
+            /// </summary>
+            private const int Eq = 0;
 
-            if (count == 1)
-            {
-                yield return AppendCandidate(GetRange(values.Single()));
-            }
+            // ReSharper disable PossibleMultipleEnumeration
+            private static bool PrivateEquals(IEnumerable<T> x, IEnumerable<T> y)
+                => x.Count() == y.Count()
+                   && x.Zip(y, (first, second) => first.CompareTo(second)).All(z => z == Eq);
 
-            for (var i = 0; i < count; i++)
-            {
-                var x = values.ElementAt(i);
-
-                // Permute everything around the Element At the Index.
-                var available = values.Where((_, j) => j != i).PermuteAll(inner, r).ToArray();
-
-                foreach (var permutation in available)
-                {
-                    // Sprinkle in the Current Element with the surrounding Available Permutations.
-                    yield return AppendCandidate(GetRange(x).Concat(permutation));
-                }
-            }
+            /// <inheritdoc />
+            /// <remarks>Which also precludes any Null issues.</remarks>
+            public override bool Equals(IEnumerable<T> x, IEnumerable<T> y)
+                => PrivateEquals(x.GetRangeOrDefault(), y.GetRangeOrDefault());
         }
 
         /// <summary>
-        /// Returns the Permutations of <paramref name="values"/>
+        /// Swaps <paramref name="a"/> with <paramref name="b"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="values">Provide the Values to be Permuted.</param>
-        /// <param name="r">Can be taken R at a time. Leave this unspecified, or Null, in order
-        /// to receive the Permutations aligned with the <paramref name="values"/> width.</param>
-        /// <returns>A Range of Permuted <paramref name="values"/>.</returns>
-        public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> values, int? r = null)
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        private static void Swap<T>(ref T a, ref T b)
         {
-            IEnumerable<IEnumerable<T>> GetOuter(out ICollection<IEnumerable<T>> x)
+            var x = a;
+            a = b;
+            b = x;
+        }
+
+        /// <summary>
+        /// Obtains the Permutations iteratively, using an Index Swapping algorithm instead of
+        /// enumerating the <paramref name="values"/> themselves. Loosely based on the references
+        /// algorithm, with a few minor adjustments taking into account the nPr issue, as well as
+        /// doing a bit of bookkeeping to track permuted results forwards as well as backwards.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="values"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        /// <see cref="IComparable{T}">Requires for <typeparamref name="T"/> to be
+        /// <see cref="IComparable{T}"/> in order for bookkeeping to track properly.</see>
+        /// <see cref="!:https://stackoverflow.com/questions/2390954/how-would-you-calculate-all-possible-permutations-of-0-through-n-iteratively/57137858"/>
+        public static IEnumerable<IEnumerable<T>> Permute<T>(this IEnumerable<T> values, int? r = null)
+            where T : IComparable<T>
+        {
+            var indexes = Range(0, values.Count()).ToArray();
+
+            // ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
+            var permuted = new List<IEnumerable<T>> { };
+            var comparer = SequenceEqualityComparer<T>.Comparer;
+
+            // TODO: TBD: sprinkle in consideration as to whether what was already permuted, etc.
+            // TODO: TBD: and does anything need to be reversed, etc?
+            IEnumerable<IEnumerable<T>> EnumerateCurrent()
             {
-                // We always want to compute this one.
-                var outer = values.PermuteAll(x = new List<IEnumerable<T>>(), r).ToArray();
-                // The further issue is whether we are contending for an R.
-                return r == null ? outer : null;
+                // TODO: TBD: which allows for permutations in the R domain...
+                for (var count = 1; count <= indexes.Length; count++)
+                {
+                    // Remember to pick up the R in the nPr calculation.
+                    if (r.HasValue && r != count)
+                    {
+                        continue;
+                    }
+
+                    var candidate = indexes.Take(count).Select(values.ElementAt).ToArray();
+                    if (!permuted.Contains(candidate, comparer))
+                    {
+                        permuted.Add(candidate);
+                        yield return candidate;
+                    }
+
+                    if (count <= 1)
+                    {
+                        continue;
+                    }
+
+                    var reversed = indexes.Reverse().Take(count).Select(values.ElementAt).ToArray();
+                    if (permuted.Contains(reversed, comparer))
+                    {
+                        continue;
+                    }
+
+                    permuted.Add(reversed);
+                    yield return reversed;
+                }
             }
 
-            // ReSharper disable once ImplicitlyCapturedClosure
-            IEnumerable<IEnumerable<T>> GetInner(IEnumerable<IEnumerable<T>> x, Func<int> getCount)
+            foreach (var x in EnumerateCurrent())
             {
-                // We land here when we want the R subset of the Permutations.
-                var count = getCount();
-                var normalized = Max(0, Min(r ?? count, count));
-                return x.Where(y => y.Count() == normalized);
+                yield return x;
             }
 
-            return GetOuter(out var inner) ?? GetInner(inner, values.Count);
+            var weights = new int[values.Count()];
+            var upper = 1;
+            while (upper < values.Count())
+            {
+                if (weights[upper] < upper)
+                {
+                    var lower = upper % 2 * weights[upper];
+                    Swap(ref indexes[lower], ref indexes[upper]);
+
+                    foreach (var x in EnumerateCurrent())
+                    {
+                        yield return x;
+                    }
+
+                    weights[upper]++;
+                    upper = 1;
+                }
+                else
+                {
+                    weights[upper] = 0;
+                    upper++;
+                }
+            }
         }
         // ReSharper restore PossibleMultipleEnumeration
     }
