@@ -53,8 +53,8 @@ namespace Kingdom.Combinatorics.Permutations
 
             // Thereby ensuring that the bits themselves are in the correct order from here on.
             expected = expected.AssertNotNull().AssertNotEmpty()
-                .AssertEqual(CalculateTotalCount(
-                    values.AssertNotNull().AssertNotEmpty().Count(), r), x => x.Count())
+                .AssertEqual(CalculateCount(
+                    values.AssertNotNull().AssertNotEmpty().Count(), r ?? values.Count()), x => x.Count())
                 .OrderBy(Render).ToArray();
 
             //var comparer = PermutationComparer.Instance.AssertNotNull();
