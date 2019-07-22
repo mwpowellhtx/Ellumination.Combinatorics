@@ -10,23 +10,23 @@
     <!-- We could manage bottom line netstandard1.3, but this is the recommended migration path. -->
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Kingdom.Combinatorics.Permutations</RootNamespace>
-    <Version>1.1.0.7929</Version>
-    <AssemblyVersion>1.1.0.7929</AssemblyVersion>
-    <FileVersion>1.1.0.7929</FileVersion>
-    <PackageVersion>1.1.0.7929</PackageVersion>
+    <Version>1.1.1.5343</Version>
+    <AssemblyVersion>1.1.1.5343</AssemblyVersion>
+    <FileVersion>1.1.1.5343</FileVersion>
+    <PackageVersion>1.1.1.5343</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <Title>Kingdom.Combinatorics.Permutations</Title>
     <PackageId>Kingdom.Combinatorics.Permutations</PackageId>
     <Description>Provides a set of helpful Combinatoric Permutations assets for use during operation.</Description>
-    <PackageTags>combinatorics; permutations; combinations; values; k; select; many; skip; enumerable</PackageTags>
+    <PackageTags>combinatorics; permutations; permutation; permute; permuted; range; default; sequence; equality; comparer; swap; index; indices; values; r; enumerate; take; count; element; at; reverse; reversed; enumerable; weight; weights; lower; upper; bound; bounds</PackageTags>
     <RepositoryUrl>https://github.com/mwpowellhtx/Kingdom.Combinatorics</RepositoryUrl>
     <IncludeSymbols Condition="'$(Configuration)'=='Debug'">true</IncludeSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
-    <DocumentationFile>bin\$(Configuration)\netstandard1.3\Kingdom.Combinatorics.Permutations.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\netstandard2.0\Kingdom.Combinatorics.Permutations.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
