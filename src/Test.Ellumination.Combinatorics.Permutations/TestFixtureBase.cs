@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-namespace Kingdom.Combinatorics.Permutations
+namespace Ellumination.Combinatorics.Permutations
 {
     using Xunit.Abstractions;
 

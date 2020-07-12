@@ -1,5 +1,5 @@
 ﻿// ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Permutations
+namespace Ellumination.Combinatorics.Permutations
 {
     // ReSharper disable InconsistentNaming
     internal static class Characters

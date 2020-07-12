@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <Version>1.1.0.2200</Version>
+        <AssemblyVersion>1.1.0.2200</AssemblyVersion>
+        <FileVersion>1.1.0.2200</FileVersion>
+        <RootNamespace>Ellumination.Combinatorics.Permutations</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="$(MSBuildProjectName).csproj.DotSettings" />
+    </ItemGroup>
+
+    <Import Project="..\Unit.Testing.props" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\Ellumination.Combinatorics.Permutations\Ellumination.Combinatorics.Permutations.csproj" />
+    </ItemGroup>
+
+</Project>

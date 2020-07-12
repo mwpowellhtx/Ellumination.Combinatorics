@@ -2,7 +2,7 @@
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Permutations
+namespace Ellumination.Combinatorics.Permutations
 {
     using Xunit.Theoretically;
     using static Characters;

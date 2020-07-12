@@ -2,7 +2,7 @@
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Permutations
+namespace Ellumination.Combinatorics.Permutations
 {
     using Xunit;
     using Xunit.Abstractions;
@@ -26,7 +26,17 @@ namespace Kingdom.Combinatorics.Permutations
         public void Verify_Permutations(IEnumerable<char> values, int? r, IEnumerable<IEnumerable<char>> expected)
         {
             // Sketch in some Factorial calculations.
-            int Factorial(int x) => x <= 0 ? 1 : x * Factorial(x - 1);
+            int Factorial(int x)
+            {
+                var result = 1;
+
+                while (x-- > 0)
+                {
+                    result *= (x + 1);
+                }
+
+                return result;
+            }
 
             int CalculateCount(int count, int rActual) => Factorial(count) / Factorial(count - rActual);
 
@@ -52,13 +62,14 @@ namespace Kingdom.Combinatorics.Permutations
             string Render(IEnumerable<char> parts) => parts.Aggregate("", (g, x) => $"{g}{x}");
 
             // Thereby ensuring that the bits themselves are in the correct order from here on.
-            expected = expected.AssertNotNull().AssertNotEmpty()
+            values = values.AssertNotNull().AssertCollectionNotEmpty();
+            expected = expected.AssertNotNull().AssertCollectionNotEmpty()
                 .AssertEqual(CalculateCount(
-                    values.AssertNotNull().AssertNotEmpty().Count(), r ?? values.Count()), x => x.Count())
+                    values.Count(), r ?? values.Count()), x => x.Count())
                 .OrderBy(Render).ToArray();
 
             //var comparer = PermutationComparer.Instance.AssertNotNull();
-            var permutations = values.Permute(r).AssertNotNull().AssertNotEmpty().OrderBy(Render).ToArray();
+            var permutations = values.Permute(r).AssertNotNull().AssertCollectionNotEmpty().OrderBy(Render).ToArray();
 
             permutations.AssertEqual(expected.Count(), x => x.Length)
                 .Zip(expected, (a, e) => new {a, e})
