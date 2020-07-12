@@ -1,7 +1,7 @@
 # Ellumination Combinatorics
 
-_[![Ellumination.Combinatorics.Combinatorials NuGet version](https://img.shields.io/nuget/dt/Ellumination.Combinatorics.Combinatorials.svg?style=flat&label=nuget%3A%20Ellumination.Combinatorics.Combinatorials)](https://www.nuget.org/packages/Ellumination.Combinatorics.Combinatorials)_
-_[![Ellumination.Combinatorics.Permutations NuGet version](https://img.shields.io/nuget/dt/Ellumination.Combinatorics.Permutations.svg?style=flat&label=nuget%3A%20Ellumination.Combinatorics.Permutations)](https://www.nuget.org/packages/Ellumination.Combinatorics.Permutations)_
+_[![Ellumination.Combinatorics.Combinatorials NuGet version](https://img.shields.io/nuget/v/Ellumination.Combinatorics.Combinatorials.svg?style=flat&label=nuget%3A%20Ellumination.Combinatorics.Combinatorials)](https://www.nuget.org/packages/Ellumination.Combinatorics.Combinatorials)_
+_[![Ellumination.Combinatorics.Permutations NuGet version](https://img.shields.io/nuget/v/Ellumination.Combinatorics.Permutations.svg?style=flat&label=nuget%3A%20Ellumination.Combinatorics.Permutations)](https://www.nuget.org/packages/Ellumination.Combinatorics.Permutations)_
 
 Welcome to the [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics) library. This solution provides a set of features helpful in the formation and discovery of Combinatorial or related combinations.
 
