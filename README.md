@@ -1,10 +1,10 @@
-# Kingdom Combinatorics
+# Ellumination Combinatorics
 
-Welcome to the [Combinatorics](http://en.wikipedia.org/wiki/Combinatorics) library. This solution provides a set of features helpful in the formation and discovery of Combinatorial or related combinations.
+Welcome to the [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics) library. This solution provides a set of features helpful in the formation and discovery of Combinatorial or related combinations.
 
 ## Combiner
 
-The [Combiner](/mwpowellhtx/Kingdom.Combinatorics/src/Kingdom.Combinatorics.Combinatorial/Combiner.cs) is the key to forming and discovering combinations over a range of potentially different sized collections.
+The [Combiner](https://github.com/mwpowellhtx/Ellumination.Combinatorics/src/Ellumination.Combinatorics.Combinatorial/Combiner.cs) is the key to forming and discovering combinations over a range of potentially different sized collections.
 
 ### Compared and Contrasted with Tally Counters
 
@@ -16,17 +16,17 @@ I was going to illustrate a &quot;simple&quot; tally counter for comparison purp
 
 ### Convenience Operators
 
-``CurrentCombination`` is provided which yields the current ``IEnumerable<object>`` mapping across the participating collections.
+`CurrentCombination` is provided which yields the current `IEnumerable<object>` mapping across the participating collections.
 
 After that we support convenience operators such as addition in terms of steps, as well as the increment operator, which is basically just addition plus one.
 
-We also support the ability to iterate over the range of combinations as an ``IEnumerable<object[]>``.
+We also support the ability to iterate over the range of combinations as an `IEnumerable<object[]>`.
 
-Helpful properties include both ``Exhausted``, which reports whether the internal indices have reached their maximum capacity, and ``Count``, which reports the total number of possible combinations given the participating collections.
+Helpful properties include both `Exhausted`, which reports whether the internal indices have reached their maximum capacity, and `Count`, which reports the total number of possible combinations given the participating collections.
 
 ### Empty Participating Collections
 
-Technically, empty collections are supported. Language level ``null`` is reported for these bins. Some operations will report false negatives, such as ``Count``, which will literally yield zero (0). You are better off depending on ``Exhausted`` in this case, although this is not full-proof at the moment, either, for certain edge cases.
+Technically, empty collections are supported. Language level `null` is reported for these bins. Some operations will report false negatives, such as `Count`, which will literally yield zero (0). You are better off depending on `Exhausted` in this case, although this is not full-proof at the moment, either, for certain edge cases.
 
 ### Overfow
 
