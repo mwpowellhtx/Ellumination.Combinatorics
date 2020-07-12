@@ -8,11 +8,12 @@
     <PropertyGroup>
         <!-- We could manage bottom line netstandard1.3, but this is the recommended migration path. -->
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.1.2.2345</Version>
-        <AssemblyVersion>1.1.2.2345</AssemblyVersion>
-        <FileVersion>1.1.2.2345</FileVersion>
-        <PackageVersion>1.1.2.2345</PackageVersion>
+        <Version>1.1.3.757</Version>
+        <AssemblyVersion>1.1.3.757</AssemblyVersion>
+        <FileVersion>1.1.3.757</FileVersion>
+        <PackageVersion>1.1.3.757</PackageVersion>
         <RootNamespace>Ellumination.Combinatorics.Permutations</RootNamespace>
+        <!--<BumpWhichVersion>Minor</BumpWhichVersion>-->
     </PropertyGroup>
 
     <PropertyGroup>

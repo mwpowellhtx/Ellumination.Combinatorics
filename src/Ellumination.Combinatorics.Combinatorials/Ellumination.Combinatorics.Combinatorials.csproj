@@ -8,11 +8,12 @@
     <!-- TODO: TBD: may instead use PackageOutputPath in order to direct the output path for package coalescence ... -->
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.2.7.29199</Version>
-        <AssemblyVersion>1.2.7.29199</AssemblyVersion>
-        <FileVersion>1.2.7.29199</FileVersion>
-        <PackageVersion>1.2.7.29199</PackageVersion>
+        <Version>1.2.8.757</Version>
+        <AssemblyVersion>1.2.8.757</AssemblyVersion>
+        <FileVersion>1.2.8.757</FileVersion>
+        <PackageVersion>1.2.8.757</PackageVersion>
         <RootNamespace>Ellumination.Combinatorics.Combinatorials</RootNamespace>
+        <!--<BumpWhichVersion>Minor</BumpWhichVersion>-->
     </PropertyGroup>
 
     <PropertyGroup>
