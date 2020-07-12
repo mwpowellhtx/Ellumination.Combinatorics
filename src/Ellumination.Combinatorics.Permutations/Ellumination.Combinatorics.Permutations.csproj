@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- We could manage bottom line netstandard1.3, but this is the recommended migration path. -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>1.1.2.2345</Version>
+        <AssemblyVersion>1.1.2.2345</AssemblyVersion>
+        <FileVersion>1.1.2.2345</FileVersion>
+        <PackageVersion>1.1.2.2345</PackageVersion>
+        <RootNamespace>Ellumination.Combinatorics.Permutations</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>Ellumination.Combinatorics.Permutations</Title>
+        <Description>Provides a set of helpful Combinatoric Permutations assets for use during operation.</Description>
+        <PackageTags>Ellumination; Technologies; combinatorics; permutations; permutation; permute; permuted; range; default; sequence; equality; comparer; swap; index; indices; values; r; enumerate; take; count; element; at; reverse; reversed; enumerable; weight; weights; lower; upper; bound; bounds</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="$(MSBuildProjectName).csproj.DotSettings" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="'$(Platform)' == 'AnyCPU'">
+        <DocumentationFile>bin\$(Configuration)\netstandard2.0\$(MSBuildProjectName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <Import Project="..\..\Licensing.props" />
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>Test.$(MSBuildProjectName)</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+</Project>

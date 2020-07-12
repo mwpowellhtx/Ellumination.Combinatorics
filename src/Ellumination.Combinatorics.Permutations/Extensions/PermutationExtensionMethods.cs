@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Permutations
+namespace Ellumination.Combinatorics.Permutations
 {
     using static Enumerable;
 
