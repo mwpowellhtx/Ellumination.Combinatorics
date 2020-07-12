@@ -1,52 +1,58 @@
 <Project>
 
-  <PropertyGroup>
-    <Authors>Michael W. Powell</Authors>
-    <Company>Kingdom Software</Company>
-    <Product>Kingdom.Combinatorics</Product>
-    <Copyright>Copyright (c) 2019</Copyright>
-    <LangVersion>7.3</LangVersion>
-    <RootNamespace>Kingdom.Combinatorics</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Authors>Michael W. Powell</Authors>
+        <Company>Ellumination Technologies</Company>
+        <Product>Ellumination.Combinatorics</Product>
+        <Copyright>Copyright (c) 2019-2020</Copyright>
+        <LangVersion>7.3</LangVersion>
+        <NoWarn>$(NoWarn);NU1603</NoWarn>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
-    <WarningLevel>2</WarningLevel>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Platform)' == 'AnyCPU'">
+        <WarningLevel>2</WarningLevel>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageProjectUrl>http://github.com/mwpowellhtx/Kingdom.Combinatorics</PackageProjectUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <RepositoryUrl>https://github.com/mwpowellhtx/Ellumination.Combinatorics</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/mwpowellhtx/Ellumination.Combinatorics</PackageProjectUrl>
+        <IncludeSymbols Condition="'$(Configuration)' == 'Debug'">true</IncludeSymbols>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <XunitVersion>2.4.1</XunitVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>Ellumination.Combinatorics</RootNamespace>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BumpAssemblyVersions" Version="1.2.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <PropertyGroup>
+        <BumpAssemblyVersionsVersion>1.6.0</BumpAssemblyVersionsVersion>
+    </PropertyGroup>
 
-  <ItemGroup Condition="Exists('..\packages\BumpAssemblyVersions\1.2.0\build\BumpAssemblyVersions.targets')">
-    <!--<BumpVersionSpec Include="Version" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="AssemblyVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="FileVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="PackageVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />-->
+    <ItemGroup>
+        <PackageReference Include="BumpAssemblyVersions" Version="$(BumpAssemblyVersionsVersion)" PrivateAssets="all">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-    <BumpVersionSpec Include="Version" PatchProviderTemplate="Increment" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="AssemblyVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="FileVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
-    <BumpVersionSpec Include="PackageVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Release'" />
+    <ItemGroup Condition="'$(Configuration)' == 'Release' And Exists('..\packages\BumpAssemblyVersions\$(BumpAssemblyVersionsVersion)\build\BumpAssemblyVersions.targets')">
+        <BumpVersionSpec Include="Version" PatchProviderTemplate="Increment" BuildProviderTemplate="MinutesSinceMidnight" />
+        <BumpVersionSpec Include="AssemblyVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="MinutesSinceMidnight" />
+        <BumpVersionSpec Include="FileVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="MinutesSinceMidnight" />
+        <BumpVersionSpec Include="PackageVersion" PatchProviderTemplate="Increment" BuildProviderTemplate="MinutesSinceMidnight" />
+    </ItemGroup>
 
-    <BumpVersionSpec Include="Version" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Debug'" />
-    <BumpVersionSpec Include="AssemblyVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Debug'" />
-    <BumpVersionSpec Include="FileVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Debug'" />
-    <BumpVersionSpec Include="PackageVersion" BuildProviderTemplate="SecondsSinceMidnight" Condition="'$(Configuration)'=='Debug'" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' == 'Debug' And Exists('..\packages\BumpAssemblyVersions\$(BumpAssemblyVersionsVersion)\build\BumpAssemblyVersions.targets')">
+        <BumpVersionSpec Include="Version" BuildProviderTemplate="Increment" />
+        <BumpVersionSpec Include="AssemblyVersion" BuildProviderTemplate="Increment" />
+        <BumpVersionSpec Include="FileVersion" BuildProviderTemplate="Increment" />
+        <BumpVersionSpec Include="PackageVersion" BuildProviderTemplate="Increment" />
+    </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="if exist &quot;$(ProjectDir)bin\$(Configuration)\*.nupkg&quot; del /f &quot;$(ProjectDir)bin\$(Configuration)\*.nupkg&quot;" />
-  </Target>
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <PropertyGroup>
+            <NuGetPackageExtension>nupkg</NuGetPackageExtension>
+            <_ActualPackageOutputPath>$(PackageOutputPath)*$(NuGetPackageExtension)</_ActualPackageOutputPath>
+        </PropertyGroup>
+        <Exec Command="if exist &quot;$(_ActualPackageOutputPath)&quot; del /f &quot;$(_ActualPackageOutputPath)&quot;"/>
+    </Target>
 
 </Project>
