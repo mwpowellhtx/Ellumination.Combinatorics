@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     internal static class Collections
     {

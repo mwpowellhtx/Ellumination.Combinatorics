@@ -2,7 +2,7 @@
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     using static Collections;
 

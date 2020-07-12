@@ -2,7 +2,7 @@
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     using Xunit;
     using Xunit.Abstractions;
@@ -23,11 +23,11 @@ namespace Kingdom.Combinatorics.Combinatorials
 
             var combiner = new Combiner(first, second);
 
-            Assert.Equal(first.Length * second.Length, combiner.Count);
+            combiner.AssertEqual(first.Length * second.Length, x => x.Count);
 
             VerifyAspect(combiner
-                , x => Assert.Equal(first, x)
-                , x => Assert.Equal(second, x)
+                , x => x.AssertEqual(first)
+                , x => x.AssertEqual(second)
             );
         }
 
@@ -39,11 +39,11 @@ namespace Kingdom.Combinatorics.Combinatorials
 
             var combiner = first.Combine(second);
 
-            Assert.Equal(first.Length * second.Length, combiner.Count);
+            combiner.AssertEqual(first.Length * second.Length, x => x.Count);
 
             VerifyAspect(combiner
-                , x => Assert.Equal(first.OfType<object>(), x)
-                , x => Assert.Equal(second.OfType<object>(), x)
+                , x => x.AssertEqual(first.OfType<object>())
+                , x => x.AssertEqual(second.OfType<object>())
             );
         }
 
@@ -69,8 +69,8 @@ namespace Kingdom.Combinatorics.Combinatorials
                 actualCount++;
             }
 
-            Assert.True(actualCount.HasValue);
-            Assert.Equal(combiner.Count, actualCount);
+            actualCount.HasValue.AssertTrue();
+            combiner.AssertEqual(actualCount, x => x.Count);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace Kingdom.Combinatorics.Combinatorials
             };
 
             // Which should Iterate over the Enumerable of Object[] Combinations.
-            Assert.Equal(ExpectedThreeAndTwoCombos, combiner);
+            combiner.AssertEqual(ExpectedThreeAndTwoCombos);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Kingdom.Combinatorics.Combinatorials
             }
 
             // We can see this as an "Action" although there is no implicit type conversion as such.
-            Assert.Throws<InvalidOperationException>((Action) IterateUntilOverflow);
+            ((Action)IterateUntilOverflow).AssertThrows<InvalidOperationException>();
         }
     }
 }

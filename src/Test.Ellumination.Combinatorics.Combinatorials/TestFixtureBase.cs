@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     using Xunit;
     using Xunit.Abstractions;
@@ -21,8 +21,7 @@ namespace Kingdom.Combinatorics.Combinatorials
 
         protected static void VerifyAspect(Combiner combiner, params Action<IEnumerable<object>>[] verifiers)
         {
-            Assert.NotNull(combiner);
-            Assert.Equal(combiner.AllValues.Count, verifiers.Length);
+            combiner.AssertNotNull().AllValues.AssertEqual(verifiers.Length, x => x.Count);
 
             for (var i = 0; i < combiner.AllValues.Count; i++)
             {

@@ -2,7 +2,7 @@
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     using Xunit;
     using Xunit.Abstractions;
@@ -22,12 +22,15 @@ namespace Kingdom.Combinatorics.Combinatorials
         [Fact]
         public void VerifyStronglyTypedCombine()
         {
+
+#pragma warning disable IDE0001 // Name can be simplified
             // ReSharper disable RedundantTypeArgumentsOfMethod
             var combiner = FourCharacters.Combine<char, int>(TwoIntegers);
+#pragma warning restore IDE0001 // Name can be simplified
 
             VerifyAspect(combiner
-                , x => Assert.Equal(FourCharacters.OfType<object>(), x)
-                , x => Assert.Equal(TwoIntegers.OfType<object>(), x)
+                , x => x.AssertEqual(FourCharacters.OfType<object>())
+                , x => x.AssertEqual(TwoIntegers.OfType<object>())
             );
         }
 
@@ -41,9 +44,9 @@ namespace Kingdom.Combinatorics.Combinatorials
             var combiner = ThreeObjects.Combine(TwoObjects, FourCharacters.OfType<object>().ToArray());
 
             VerifyAspect(combiner
-                , x => Assert.Equal(ThreeObjects, x)
-                , x => Assert.Equal(TwoObjects, x)
-                , x => Assert.Equal(FourCharacters.OfType<object>(), x)
+                , x => x.AssertEqual(ThreeObjects)
+                , x => x.AssertEqual(TwoObjects)
+                , x => x.AssertEqual(FourCharacters.OfType<object>())
             );
         }
 
@@ -55,16 +58,19 @@ namespace Kingdom.Combinatorics.Combinatorials
         public void VerifyStronglyTypedAppend()
         {
             var combiner = ThreeObjects.Combine(TwoObjects);
-            // Make sure that we are using the Strongly Typed Version.
-            var appended = combiner.Append<char>(FourCharacters);
 
-            Assert.NotNull(appended);
-            Assert.NotSame(combiner, appended);
+            // Make sure that we are using the Strongly Typed Version.
+#pragma warning disable IDE0001 // Name can be simplified
+            // ReSharper disable RedundantTypeArgumentsOfMethod
+            var appended = combiner.Append<char>(FourCharacters);
+#pragma warning restore IDE0001 // Name can be simplified
+
+            combiner.AssertNotNull().AssertNotSame(appended);
 
             VerifyAspect(appended
-                , x => Assert.Equal(ThreeObjects, x)
-                , x => Assert.Equal(TwoObjects, x)
-                , x => Assert.Equal(FourCharacters.OfType<object>(), x)
+                , x => x.AssertEqual(ThreeObjects)
+                , x => x.AssertEqual(TwoObjects)
+                , x => x.AssertEqual(FourCharacters.OfType<object>())
             );
         }
 
@@ -79,14 +85,13 @@ namespace Kingdom.Combinatorics.Combinatorials
             // Make sure that we are using the Object[] params version.
             var appended = combiner.Append(FourCharacters.OfType<object>(), FiveBooleans.OfType<object>());
 
-            Assert.NotNull(appended);
-            Assert.NotSame(combiner, appended);
+            appended.AssertNotNull().AssertNotSame(combiner);
 
             VerifyAspect(appended
-                , x => Assert.Equal(ThreeObjects, x)
-                , x => Assert.Equal(TwoObjects, x)
-                , x => Assert.Equal(FourCharacters.OfType<object>(), x)
-                , x => Assert.Equal(FiveBooleans.OfType<object>(), x)
+                , x => x.AssertEqual(ThreeObjects)
+                , x => x.AssertEqual(TwoObjects)
+                , x => x.AssertEqual(FourCharacters.OfType<object>())
+                , x => x.AssertEqual(FiveBooleans.OfType<object>())
             );
         }
     }
