@@ -3,7 +3,7 @@
 setlocal
 
 rem We do not publish the API key as part of the script itself.
-if "%my_nuget_api_key%"=="" (
+if "%my_nuget_api_key%" == "" (
     echo You are prohibited from making these sorts of changes.
     goto :end
 )
@@ -24,15 +24,24 @@ rem Go ahead and pre-seed the Projects up front.
 :set_projects
 set projects=
 rem Setup All Projects
-set all_projects=Kingdom.Combinatorics.Combinatorials
-set all_projects=%all_projects%%delim%Kingdom.Combinatorics.Permutations
+set all_projects=Ellumination.Combinatorics.Combinatorials
+set all_projects=%all_projects%%delim%Ellumination.Combinatorics.Permutations
 rem Setup Combinatorials
-set combinatorials_projects=Kingdom.Combinatorics.Combinatorials
+set combinatorials_projects=Ellumination.Combinatorics.Combinatorials
 rem Setup Permutations
-set permutations_projects=Kingdom.Combinatorics.Permutations
-
+set permutations_projects=Ellumination.Combinatorics.Permutations
 
 :parse_args
+
+:set_pause
+if "%1" == "--pause" (
+    set should_pause=1
+    goto :next_arg
+)
+if "%1" == "--no-pause" (
+    set should_pause=0
+    goto :next_arg
+)
 
 rem Done parsing the args.
 if "%1" == "" (
@@ -52,6 +61,18 @@ if "%1" == "--dry-run" (
 :set_config
 if "%1" == "--config" (
     set config=%2
+    shift
+    goto :next_arg
+)
+
+:set_config
+if "%1" == "--drive" (
+    set drive_letter=%2
+    shift
+    goto :next_arg
+)
+if "%1" == "--drive-letter" (
+    set drive_letter=%2
     shift
     goto :next_arg
 )
@@ -154,9 +175,12 @@ if "%config%" == "" (
 :publish_projects
 
 :set_vars
+if "%should_pause%" == "" set should_pause=1
+if "%drive_letter%" == "" set drive_letter=F:
+
 set xcopy_exe=xcopy.exe
 set xcopy_opts=/y /f
-set xcopy_dest_dir=G:\Dev\NuGet\local\packages
+set xcopy_dest_dir=%drive_letter%\Dev\NuGet\local\packages
 rem Expecting NuGet to be found in the System Path.
 set nuget_exe=NuGet.exe
 set nuget_push_verbosity=detailed
@@ -213,4 +237,6 @@ exit /b
 
 endlocal
 
-pause
+if "%should_pause%" == "1" pause
+
+:fini
