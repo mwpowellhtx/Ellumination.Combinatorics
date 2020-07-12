@@ -1,29 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingdom.Combinatorics.Combinatorials", "Kingdom.Combinatorics.Combinatorials\Kingdom.Combinatorics.Combinatorials.csproj", "{BF3932F6-5342-48B4-BE68-B1C06F83930C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.Combinatorics.Combinatorials", "Ellumination.Combinatorics.Combinatorials\Ellumination.Combinatorics.Combinatorials.csproj", "{BF3932F6-5342-48B4-BE68-B1C06F83930C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{CAF87CD2-30B4-41AB-8EE6-8072DAC39984}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CAF87CD2-30B4-41AB-8EE6-8072DAC39984}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E9DB36D-CE05-4968-8383-E7D959ED5CED}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7E9DB36D-CE05-4968-8383-E7D959ED5CED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingdom.Combinatorics.Combinatorials.Tests", "Kingdom.Combinatorics.Combinatorials.Tests\Kingdom.Combinatorics.Combinatorials.Tests.csproj", "{D98445F5-2157-406A-B614-8F460B744C5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Ellumination.Combinatorics.Combinatorials", "Test.Ellumination.Combinatorics.Combinatorials\Test.Ellumination.Combinatorics.Combinatorials.csproj", "{D98445F5-2157-406A-B614-8F460B744C5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingdom.Combinatorics.Permutations", "Kingdom.Combinatorics.Permutations\Kingdom.Combinatorics.Permutations.csproj", "{C8FCCFA0-94EE-45BD-8663-C34EE536A167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.Combinatorics.Permutations", "Ellumination.Combinatorics.Permutations\Ellumination.Combinatorics.Permutations.csproj", "{C8FCCFA0-94EE-45BD-8663-C34EE536A167}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{156D385A-F476-4783-9D0C-A93C96A4C491}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{156D385A-F476-4783-9D0C-A93C96A4C491}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Unit.Testing.props = Unit.Testing.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Ellumination.Combinatorics.Permutations", "Test.Ellumination.Combinatorics.Permutations\Test.Ellumination.Combinatorics.Permutations.csproj", "{375C04EA-336D-4C74-AF92-DBF7DAA28056}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".parent", ".parent", "{A37ED99A-599A-4DB8-BB42-9BD3620B67ED}"
 	ProjectSection(SolutionItems) = preProject
 		..\CONTRIBUTORS = ..\CONTRIBUTORS
-		Directory.Build.props = Directory.Build.props
 		..\LICENSE = ..\LICENSE
-		Licensing.props = Licensing.props
-		NuGet.Config = NuGet.Config
+		..\Licensing.props = ..\Licensing.props
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingdom.Combinatorics.Permutations.Tests", "Kingdom.Combinatorics.Permutations.Tests\Kingdom.Combinatorics.Permutations.Tests.csproj", "{375C04EA-336D-4C74-AF92-DBF7DAA28056}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6DAD2D7-DE8C-4756-A884-F09E125736BE}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+		tools\NuGet\publish.cmd = tools\NuGet\publish.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +64,7 @@ Global
 		{D98445F5-2157-406A-B614-8F460B744C5D} = {7E9DB36D-CE05-4968-8383-E7D959ED5CED}
 		{C8FCCFA0-94EE-45BD-8663-C34EE536A167} = {CAF87CD2-30B4-41AB-8EE6-8072DAC39984}
 		{375C04EA-336D-4C74-AF92-DBF7DAA28056} = {7E9DB36D-CE05-4968-8383-E7D959ED5CED}
+		{A37ED99A-599A-4DB8-BB42-9BD3620B67ED} = {156D385A-F476-4783-9D0C-A93C96A4C491}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35C9BA11-BD79-440A-9991-4DCF1C8C89BA}
