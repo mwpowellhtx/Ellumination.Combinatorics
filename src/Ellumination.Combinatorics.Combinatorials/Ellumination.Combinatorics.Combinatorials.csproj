@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <!-- TODO: TBD: may instead use PackageOutputPath in order to direct the output path for package coalescence ... -->
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>1.2.7.29199</Version>
+        <AssemblyVersion>1.2.7.29199</AssemblyVersion>
+        <FileVersion>1.2.7.29199</FileVersion>
+        <PackageVersion>1.2.7.29199</PackageVersion>
+        <RootNamespace>Ellumination.Combinatorics.Combinatorials</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>Ellumination.Combinatorics.Combinatorials</Title>
+        <Description>Provides a set of helpful Combinatoric assets for use during operation.</Description>
+        <PackageTags>Ellumination; Technologies; combinatorics; combinatorial; combiner; combine; append; values; object; current; combination; combinations; exhausted; count; long; enumerable; array</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="$(MSBuildProjectName).csproj.DotSettings" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="'$(Platform)' == 'AnyCPU'">
+        <DocumentationFile>bin\$(Configuration)\netstandard2.0\$(MSBuildProjectName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <Import Project="..\..\Licensing.props" />
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>Test.$(MSBuildProjectName)</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+</Project>

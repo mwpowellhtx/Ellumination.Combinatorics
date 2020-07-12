@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     /// <summary>
     /// 

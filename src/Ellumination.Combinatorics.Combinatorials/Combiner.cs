@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     /// <summary>
     /// The Combiner implementation class accepts multiple jagged collections, meaning not all

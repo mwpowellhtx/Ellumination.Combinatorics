@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // ReSharper disable IdentifierTypo
-namespace Kingdom.Combinatorics.Combinatorials
+namespace Ellumination.Combinatorics.Combinatorials
 {
     internal static class CollectionExtensionMethods
     {
@@ -12,6 +12,8 @@ namespace Kingdom.Combinatorics.Combinatorials
         /// <typeparam name="T"></typeparam>
         /// <param name="values"></param>
         /// <param name="action"></param>
+        /// <remarks>This is a helpful extension method, but w edo not want to necessary pollute
+        /// subscriber namespaces with extraneous helper methods.</remarks>
         public static void ForEach<T>(this IEnumerable<T> values, Action<T> action)
         {
             foreach (var x in values)
