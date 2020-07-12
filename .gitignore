@@ -1,7 +1,10 @@
 .vs/
-packages/
 bin/
 obj/
+packages/
 
 *.user
 *.DotSettings
+
+# We want to ignore the build time artifacts.
+LICENSE.txt
